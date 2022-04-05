@@ -1,0 +1,33 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <style type="text/css">
+        div{
+            border:2px solid black;
+            margin:10px;
+            font-size:20px;
+        }
+    </style>
+</head>
+<body>
+    <script type="text/javascript">
+        document.addEventListener("DOMContentLoaded", function () {
+            let divClick = document.getElementById("divClick");
+            let divMakeThisBigger = document.getElementById("divMakeThisBigger");
+            let divSize = 20;
+
+            divClick.addEventListener("click", function () {
+                //This code executes every single time someone clicks the top div.
+                divSize++;
+                divMakeThisBigger.style.fontSize = divSize + "px";
+            });
+        });
+    </script>
+    <h1>Here's a page that uses javascript to access the document.</h1>
+    <div id="divClick">Here's a div that will change something on the page when clicked.</div>
+    <div id="divMakeThisBigger">Here's a div that will be changed when the above div is clicked.</div>
+</body>
+
+</html>

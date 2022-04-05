@@ -1,0 +1,88 @@
+﻿@model AvoidScurvyMVCApplication.Models.ProductViewing
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>ProductViewing</h4>
+<hr />
+<script type="text/javascript">
+    document.addEventListener("DOMContentLoaded", function (){
+        let txtProductNameAutoComplete = document.getElementById('txtProductNameAutoComplete');
+        txtProductNameAutoComplete.addEventListener("change", function (){
+            createNewProduct();
+            //const uriAutoComplete = "/api/ProductAPI/Search/" + txtProductNameAutoComplete.value;
+            //fetch(uriAutoComplete)
+            //    .then(response => response.json())
+            //    .then(data => populateAutoComplete(data))
+            //    .catch(error => console.error('Unable to get items.', error));
+
+        })
+        function populateAutoComplete(data){
+            let autoCompleteResults = document.getElementById('autoCompleteResults');
+            autoCompleteResults.innerHTML = ""
+            autoCompleteResults.innerHTML = JSON.stringify(data);
+        }
+        function createNewProduct()
+        {
+            const item = {
+                ProductId: 1,
+                ViewingTime: Date.now(),
+                StoreName: "Local",
+                PricePerServing: 5
+              };
+            let uri = "/api/ProductViewingsAPI";
+            fetch(uri, {
+                method: 'POST',
+                headers: {
+                  'Accept': 'application/json',
+                  'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(item)
+              });
+        }
+        createNewProduct();
+    })
+</script>
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type=text id="txtProductNameAutoComplete" placeholder="Oranges" />
+            <span id="autoCompleteResults">This will contain auto complete results!</span>
+            <div class="form-group">
+                <label asp-for="ProductId" class="control-label">Product:</label>
+                <input asp-for="ProductId" class="form-control" />
+                <span asp-validation-for="ProductId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ViewingTime" class="control-label"></label>
+                <input asp-for="ViewingTime" class="form-control" />
+                <span asp-validation-for="ViewingTime" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="StoreName" class="control-label"></label>
+                <input asp-for="StoreName" class="form-control" />
+                <span asp-validation-for="StoreName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PricePerServing" class="control-label"></label>
+                <input asp-for="PricePerServing" class="form-control" />
+                <span asp-validation-for="PricePerServing" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

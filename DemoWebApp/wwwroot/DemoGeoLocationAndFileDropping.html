@@ -1,0 +1,80 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <style type="text/css">
+        #divDropTarget, #divFileContent {
+            background-color: lightgray;
+            border: 2px solid black;
+            padding: 5px;
+            margin: 10px;
+            width: 500px;
+        }
+
+        #geoLink {
+            display: inline-block;
+            font-weight: bold;
+            width: 600px;
+        }
+    </style>
+    <script type="text/javascript">
+        document.addEventListener("DOMContentLoaded", function () {
+            let divDropTarget = document.getElementById("divDropTarget");
+            let divFileContent = document.getElementById("divFileContent");
+
+            let btnGenerateLocationLink = document.getElementById("btnGenerateLocationLink");
+            let geoLocationSection = document.getElementById("geoLocationSection");
+            let geoLink = document.getElementById("geoLink");
+            divDropTarget.addEventListener("dragover", function (e) {
+                e.preventDefault(); //This event handler is necessary to prevent the file from being opened.
+            });
+            divDropTarget.addEventListener("drop", function (e) { //This event handler loads the file.
+                e.preventDefault();
+                let reader = new FileReader();
+                reader.onload = function () {
+                    divFileContent.innerHTML = reader.result;
+                }
+                reader.onerror = function () {
+                    alert("Something went wrong!");
+                }
+                reader.readAsText(e.dataTransfer.files[0]);
+            });
+            btnGenerateLocationLink.addEventListener("click", function () {
+                navigator.geolocation.getCurrentPosition(function (result) {
+                    let lat = result.coords.latitude;
+                    let long = result.coords.longitude;
+                    let linkTarget = `https://bing.com/maps/default.aspx?cp=${lat}~${long}`;
+                    geoLink.href = linkTarget;
+                    geoLink.target = "_blank";
+                    geoLink.innerHTML = `Click here to view your location in bing maps! (Latitude:${lat} Longitude: ${long})`;
+                }, function (result) {
+                    geoLink.innerHTML = "Location could not be retrieved.";
+                    geoLink.href = "#";
+                    geoLink.target = "_self";
+                });
+                alert('I cant access the position details here!');
+            });
+        });
+    </script>
+</head>
+<body>
+    <header>
+        <h1>Demo of File Dropping and Geolocation</h1>
+    </header>
+    <article>
+        <section>
+            <h2>File Drag and Drop</h2>
+            <div id="divDropTarget">Drop a text file onto this div to populate the div below!</div>
+            <div id="divFileContent">...</div>
+        </section>
+        <section id="geoLocationSection">
+            <h2>Geolocation</h2>
+            <a href="https://bing.com/maps/default.aspx?cp=34~-82" target="_blank">Example link to 34,-82</a>
+            <div>Click the button to have your location detected: We will generate a bing maps link to your location!</div>
+            <input type="button" id="btnGenerateLocationLink" value="Get Location" />
+            <a id="geoLink" href="#">Link not currently set.</a>
+        </section>
+    </article>
+</body>
+</html>

@@ -1,0 +1,12 @@
+﻿@using DemoMVCCoreWebApp.Services
+@inject IVisitorCounter VisitorCounter
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <h3>Current Visitor Counter is @VisitorCounter.CounterValue</h3>
+    @Html.ActionLink("Chase Game", "Index", "Chase");
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>

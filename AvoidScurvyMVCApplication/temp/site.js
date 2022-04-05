@@ -1,0 +1,1 @@
+function demojavascript(){alert("my sample var used in javascript5.")}

@@ -1,0 +1,57 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+}
+@section Head{
+    <style type="text/css">
+        #svgChaseGame{
+            height:500px;
+            width:500px;
+            background-color:lightblue;
+            border:2px solid black;
+            display:block;
+        }
+        #canvasChaseGame{
+            height:500px;
+            width:500px;
+            background-color:lightblue;
+            border:2px solid black;
+            display:block;
+        }
+        #chaseGamePlayerOne{
+            position:absolute;
+            height:20px;
+            width:20px;
+            background-color:red;
+        }
+        #chaseGamePlayerTwo{
+            position:absolute;
+            height:20px;
+            width:20px;
+            background-color:blue;
+        }
+        
+    </style>
+}
+
+<h1>Let's play chase!</h1>
+<button id="btnJoinChaseGame" disabled="disabled">Join Game</button>
+<button id="btnStartChaseGame">Start Game</button>
+@* <svg id="svgChaseGame">
+    <rect x=0 y=240 width=20 height=20 fill="red" id="chaseGamePlayerOne">
+    </rect>
+    <rect x=480 y=240 width=20 height=20 fill="blue" id="chaseGamePlayerTwo">
+    </rect>
+</svg> *@
+@* <div id="svgChaseGame">
+    <div id="chaseGamePlayerOne">
+    </div>
+    <div id="chaseGamePlayerTwo">
+    </div>
+</div> *@
+<canvas id="canvasChaseGame"/>
+    
+
+
+<script src="~/js/signalr/dist/browser/signalr.js"></script>
+<script src="~/js/chase.js"></script>

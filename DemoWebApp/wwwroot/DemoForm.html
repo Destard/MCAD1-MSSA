@@ -1,0 +1,51 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <style type="text/css">
+        form label{
+            display:inline-block;
+            width:300px;
+            text-align:right;
+        }
+    </style>
+</head>
+    
+<body>
+    <script type="text/javascript">
+        document.addEventListener("DOMContentLoaded", function () {
+            let caloriesInput = document.getElementById("calories");
+            caloriesInput.addEventListener("input", function () {
+                let value = parseInt(caloriesInput.value);
+                if (value % 10 != 0) {
+                    caloriesInput.setCustomValidity("Calories must be a multiple of 10");
+                }
+                else {
+                    caloriesInput.setCustomValidity("");
+                }
+            })
+        })
+    </script>
+    <h1>
+        Form Demonstration
+    </h1>
+    <form method="post" action="SubmitFavoriteFood">
+        <fieldset>
+            <legend>
+                Describe one of your favorite foods:
+            </legend>
+            <label for="name">Name:</label><input id="name" type="text" name="Name" required/><br />
+            <label for="mealtime">Is this a breakfast, lunch or dinner item?</label><select id="mealtime" name="Mealtime">
+                <option>Breakfast</option>
+                <option>Lunch</option>
+                <option>Dinner </option>
+            </select><br />
+            <label for="calories">How many calories is in a standard serving?</label><input id="calories" min="0" max="2000" type="number" name="Calories" /><br />
+            <label for="hotorcold">Is this a cold meal?</label><input id="hotorcold" type="checkbox" name="ColdMeal" /><br />
+            <label for="firsteatendate">When did you first eat it?</label><input id="firsteatendate" type="date" name="FirstEatenDate" /><br />
+            <input type="submit" />
+        </fieldset>
+    </form>
+</body>
+</html>

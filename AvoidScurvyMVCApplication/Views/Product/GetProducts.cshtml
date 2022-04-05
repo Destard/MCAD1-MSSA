@@ -1,0 +1,37 @@
+﻿@model IEnumerable<Product>
+@{
+    ViewData["Title"] = "Get Products";
+}
+<h2>Get Products </h2>
+<a asp-controller="Product" asp-action="AddProduct">Add a New Product</a>
+<table>
+    <thead>
+        <tr>
+            <th>ProductID</th>
+            <th>Name</th>
+            <th>Calories</th>
+            <th>Daily Amount of Vitamin C</th>
+            <th>UPC</th>
+            <th>Star Rating</th>
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+    @foreach (Product p in Model)
+    {
+        <tr>
+            <td>@p.ProductID</td>
+            <td>@p.Name</td>
+            <td>@p.Calories</td>
+            <td>@p.VitCDailyAmount</td>
+            <td>@p.UPC</td>
+            <td>@p.StarRating</td>
+            <td><a asp-action="EditProduct" asp-route-id="@p.ProductID">Edit</a> </td>
+            <td>@await Component.InvokeAsync("ProductSummary", new { productId=p.ProductID })</td>
+        </tr>
+    }
+</table>
+
+@section Scripts{
+    <script type="text/javascript" src=/js/site.js></script>
+}
