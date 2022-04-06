@@ -1,4 +1,6 @@
 ﻿using AvoidScurvyMVCApplication.Models;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
@@ -7,9 +9,14 @@ namespace AvoidScurvyMVCApplication.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly SignInManager<IdentityUser> _signInManager;
+        private readonly UserManager<IdentityUser> _userManager;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, SignInManager<IdentityUser> signInManager,
+                UserManager<IdentityUser> userManager)
         {
+            _signInManager = signInManager;
+            _userManager = userManager;
             _logger = logger;
         }
 
@@ -17,7 +24,7 @@ namespace AvoidScurvyMVCApplication.Controllers
         {
             return View();
         }
-
+        [Authorize()]
         public IActionResult Privacy()
         {
             return View();

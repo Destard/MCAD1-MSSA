@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using AvoidScurvyMVCApplication.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 
-public class AvoidScurvyContext : DbContext
+public class AvoidScurvyContext : IdentityDbContext
 {
     public DbSet<Product> Products { get; set; }
     public DbSet<ProductViewing> ProductViewings { get; set; }

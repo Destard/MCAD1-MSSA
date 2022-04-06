@@ -19,7 +19,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AvoidScurvyMVCApplication",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SneakerProto", "SneakerProto\SneakerProto.csproj", "{7B2C0D03-5EA0-40A2-9CAC-4E7E07EF7240}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AvoidScurvyMVCApplicationTests", "AvoidScurvyMVCApplicationTests\AvoidScurvyMVCApplicationTests.csproj", "{9678971F-C8D0-4EEA-9AD0-CC55A78D1643}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AvoidScurvyMVCApplicationTests", "AvoidScurvyMVCApplicationTests\AvoidScurvyMVCApplicationTests.csproj", "{9678971F-C8D0-4EEA-9AD0-CC55A78D1643}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AuthMVCDemo", "AuthMVCDemo\AuthMVCDemo.csproj", "{186E3580-5394-4EF0-9A5A-2505F7EE419C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -63,6 +65,10 @@ Global
 		{9678971F-C8D0-4EEA-9AD0-CC55A78D1643}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9678971F-C8D0-4EEA-9AD0-CC55A78D1643}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9678971F-C8D0-4EEA-9AD0-CC55A78D1643}.Release|Any CPU.Build.0 = Release|Any CPU
+		{186E3580-5394-4EF0-9A5A-2505F7EE419C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{186E3580-5394-4EF0-9A5A-2505F7EE419C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{186E3580-5394-4EF0-9A5A-2505F7EE419C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{186E3580-5394-4EF0-9A5A-2505F7EE419C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
