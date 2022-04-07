@@ -19,17 +19,15 @@ namespace DemoMVCCoreWebApp.Hubs
         public async Task JoinGame()
         {
             _chaseGame.JoinGame(Context.ConnectionId);
-            await Clients.All.SendAsync("PlayerJoined", _chaseGame.GameState);
+            await Clients.Caller.SendAsync("PlayerJoined");
         }
         public async Task StartGame()
         {
             _chaseGame.StartGame();
-            //await Clients.All.SendAsync("ReceiveMessage", user, message);
         }
         public async Task SetPlayerPosition(Coordinates coordinates)
         {
             _chaseGame.SetPlayerTarget(Context.ConnectionId, coordinates);
-            //await Clients.All.SendAsync("ReceiveMessage", user, message);
         }
     }
 }

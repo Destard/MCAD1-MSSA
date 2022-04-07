@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 
-public class AvoidScurvyContext : IdentityDbContext
+public class AvoidScurvyContext : IdentityDbContext<AvoidScurvyIdentityUser>
 {
     public DbSet<Product> Products { get; set; }
     public DbSet<ProductViewing> ProductViewings { get; set; }

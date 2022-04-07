@@ -1,3 +1,4 @@
+using AvoidScurvyMVCApplication.Models;
 using AvoidScurvyMVCApplication.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -9,9 +10,10 @@ builder.Logging.ClearProviders()
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddResponseCaching();
 builder.Services.AddDbContext<AvoidScurvyContext>(options =>
   options.UseSqlServer(builder.Configuration.GetConnectionString("AvoidScurvyContext")));
-builder.Services.AddDefaultIdentity<IdentityUser>()
+builder.Services.AddDefaultIdentity<AvoidScurvyIdentityUser>()
     .AddEntityFrameworkStores<AvoidScurvyContext>();
 builder.Configuration.AddEnvironmentVariables();
 builder.Services.AddAuthentication()
@@ -21,7 +23,7 @@ builder.Services.AddAuthentication()
         options.ClientSecret = builder.Configuration["DiscordClientSecret"];
     });
 
-builder.Services.AddScoped<IProductRepository, DBContextProductRepository>();
+builder.Services.AddTransient<IProductRepository, DBContextProductRepository>();
 
 
 var app = builder.Build();
@@ -36,7 +38,7 @@ if (!app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
-
+app.UseResponseCaching();
 app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();

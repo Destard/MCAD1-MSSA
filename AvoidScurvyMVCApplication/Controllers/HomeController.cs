@@ -9,11 +9,11 @@ namespace AvoidScurvyMVCApplication.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        private readonly SignInManager<IdentityUser> _signInManager;
-        private readonly UserManager<IdentityUser> _userManager;
+        private readonly SignInManager<AvoidScurvyIdentityUser> _signInManager;
+        private readonly UserManager<AvoidScurvyIdentityUser> _userManager;
 
-        public HomeController(ILogger<HomeController> logger, SignInManager<IdentityUser> signInManager,
-                UserManager<IdentityUser> userManager)
+        public HomeController(ILogger<HomeController> logger, SignInManager<AvoidScurvyIdentityUser> signInManager,
+                UserManager<AvoidScurvyIdentityUser> userManager)
         {
             _signInManager = signInManager;
             _userManager = userManager;

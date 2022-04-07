@@ -1,4 +1,6 @@
-﻿namespace DemoMVCCoreWebApp.Services
+﻿using DemoMVCCoreWebApp.Utilities;
+
+namespace DemoMVCCoreWebApp.Services
 {
     public class ChaseGame : IChaseGame
     {
@@ -8,6 +10,7 @@
         private readonly Coordinates _ArenaSize = new () { X = 500, Y = 500 };
         public event EventHandler GameOver;
         public event EventHandler GameProgress;
+        public bool IsPlaying { get; private set; }
         private Timer _gameTimer;
         public GameState GameState { get; set; }
         public ChaseGame()
@@ -17,6 +20,7 @@
         }
         public void InitializeGame()
         {
+            IsPlaying = false;
             GameState = new GameState()
             {
                 WinnerID = "",
@@ -43,7 +47,8 @@
         }
         public void StartGame()
         {
-            _gameTimer = new Timer(new TimerCallback(MovePlayers), GameState, 0, 100);
+            IsPlaying = true;
+            _gameTimer = new Timer(new TimerCallback(MovePlayers), GameState, 0, Globals.REFRESH_RATE);
         }
         public void MovePlayers(object input)
         {
@@ -64,7 +69,7 @@
             //     return;
             // }
             //else { 
-                AdjustPlayerVelocities(GameState.Players);
+            AdjustPlayerVelocities(GameState.Players);
             //}
             //GameProgress(this, EventArgs.Empty);
         }

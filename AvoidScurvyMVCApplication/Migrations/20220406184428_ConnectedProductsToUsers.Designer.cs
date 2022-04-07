@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AvoidScurvyMVCApplication.Migrations
 {
     [DbContext(typeof(AvoidScurvyContext))]
-    partial class AvoidScurvyContextModelSnapshot : ModelSnapshot
+    [Migration("20220406184428_ConnectedProductsToUsers")]
+    partial class ConnectedProductsToUsers
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -54,7 +56,7 @@ namespace AvoidScurvyMVCApplication.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Products", (string)null);
+                    b.ToTable("Products");
                 });
 
             modelBuilder.Entity("AvoidScurvyMVCApplication.Models.ProductViewing", b =>
@@ -80,7 +82,7 @@ namespace AvoidScurvyMVCApplication.Migrations
 
                     b.HasKey("ProductViewingId");
 
-                    b.ToTable("ProductViewings", (string)null);
+                    b.ToTable("ProductViewings");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>

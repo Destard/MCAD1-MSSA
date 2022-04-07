@@ -1,4 +1,5 @@
 ﻿using AvoidScurvyMVCApplication.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace AvoidScurvyMVCApplication.Services
 {
@@ -11,7 +12,7 @@ namespace AvoidScurvyMVCApplication.Services
         }
         public List<Product> GetAllProducts()
         {
-            return _dbContext.Products.ToList();
+            return _dbContext.Products.Include(p => p.User).ToList();
         }
         public void AddProduct(Product p)
         {

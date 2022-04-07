@@ -1,4 +1,5 @@
 ﻿using DemoMVCCoreWebApp.Hubs;
+using DemoMVCCoreWebApp.Utilities;
 using Microsoft.AspNetCore.SignalR;
 
 namespace DemoMVCCoreWebApp.Services
@@ -16,8 +17,9 @@ namespace DemoMVCCoreWebApp.Services
         {
             while (!stoppingToken.IsCancellationRequested)
             {
-                await _hubContext.Clients.All.SendAsync("GameProgress", _chaseGame.GameState);
-                await Task.Delay(100);
+                if (_chaseGame.IsPlaying)
+                    await _hubContext.Clients.All.SendAsync("GameProgress", _chaseGame.GameState);
+                await Task.Delay(Globals.REFRESH_RATE);
             }
         }
     }

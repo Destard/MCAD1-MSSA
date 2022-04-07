@@ -4,10 +4,12 @@
     {
         event EventHandler GameOver;
         event EventHandler GameProgress;
+        bool IsPlaying { get; }
         GameState GameState { get; set; }
         void SetPlayerTarget(string ClientID, Coordinates coordinates);
         void JoinGame(string ClientID);
         void StartGame();
+        
     }
     public class GameState
     {

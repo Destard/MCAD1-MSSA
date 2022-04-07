@@ -17,7 +17,7 @@ namespace AvoidScurvyMVCApplication.Controllers.Tests
         public void AddProductPostTestIfInvalidModelReturnsPostViewWithSameObject()
         {
             //Arrange
-            ProductController testController = new ProductController(null, null,null);
+            ProductController testController = new ProductController(null, null,null,null);
             Product invalidProduct = new Product()
             {
                 ProductID = 10,
