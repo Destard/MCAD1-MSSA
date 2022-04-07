@@ -4,8 +4,14 @@
 }
 <h2>Get Products </h2>
 <a asp-controller="Product" asp-action="AddProduct">Add a New Product</a>
-
-<table>
+@if (@TempData["AlertMessage"] != null)
+{
+<div class="alert alert-warning alert-dismissible fade show" role="alert">
+  <strong>@TempData["AlertMessage"]</strong>
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+}
+<table class="table">
     <thead>
         <tr>
             <th>ProductID</th>

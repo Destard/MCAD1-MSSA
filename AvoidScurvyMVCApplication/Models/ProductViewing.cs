@@ -20,6 +20,6 @@ namespace AvoidScurvyMVCApplication.Models
         [Range(0,10000)]
         [Display(Name = "Price Per Serving")]
         public decimal PricePerServing { get; set; }
-        //public virtual Product Product { get; set; }
+        public Product Product { get; set; }
     }
 }

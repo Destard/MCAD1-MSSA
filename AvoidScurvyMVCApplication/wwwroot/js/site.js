@@ -6,3 +6,7 @@ function demojavascript() {
     let x = "my sample var used in javascript8.";
     alert(x);
 }
+var toastElList = [].slice.call(document.querySelectorAll('.toast'))
+var toastList = toastElList.map(function (toastEl) {
+    return new bootstrap.Toast(toastEl, option)
+})

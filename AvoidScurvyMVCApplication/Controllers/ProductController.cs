@@ -23,21 +23,21 @@ namespace AvoidScurvyMVCApplication.Controllers
             _userManager = userManager;
         }
 
-        public IActionResult RecreateDatabase()
+        public async Task<IActionResult> RecreateDatabase()
         {
-            DbInitializer.Initialize(_avoidScurvyContext);
+            await DbInitializer.Initialize(_avoidScurvyContext, _userManager);
             _logger.LogCritical("I just recreated my entire database!");
             return RedirectToAction("Index", "Home");
         }
-        [ResponseCache(Duration = 20)]
+        [ResponseCache(VaryByHeader = "User-Agent", Duration = 30)]
+        public IActionResult Index()
+        {
+            return RedirectToAction("GetProducts");
+        }
         public IActionResult GetProducts()
         {
             _avoidScurvyContext.Products.ToList();
-            //var userId = _userManager.GetUserId(User);
-            //var listProducts = _avoidScurvyContext.Products.ToList();
             var listProducts = _repository.GetAllProducts();
-            //var listProducts = _repository.GetAllProductsForUser(userId);
-
             //var ProductsOver100CaloriesSortedByVitCDescending =
             //    (from product in _avoidScurvyContext.Products
             //     where product.Calories > 100
@@ -73,14 +73,8 @@ namespace AvoidScurvyMVCApplication.Controllers
             product.UserId = _userManager.GetUserId(User);
             //if (ModelState.IsValid)
             //{
-                
                 _repository.AddProduct(product);
-                //_avoidScurvyContext.Products.Add(product);
-                //_avoidScurvyContext.SaveChanges();
-                //This if statement is only entered if the Model class that is accepted as input to this method
-                //meets its validation rules.
-                //I would be storing the new Product Details within a database.
-                //AddToDatabase(Name, VitCDailyAmount);
+                TempData["AlertMessage"] = $"{product.Name} Created Successfully!";
                 return RedirectToAction("GetProducts");
             //}
             return View("AddProduct", product);
@@ -99,20 +93,17 @@ namespace AvoidScurvyMVCApplication.Controllers
         public IActionResult EditProduct(Product product, int id)
         //These parameters are populated from the form.
         {
-            if (ModelState.IsValid)
-            {
+            //if (ModelState.IsValid)
+            //{
                 product.ProductID = id;
-                //This if statement is only entered if the Model class that is accepted as input to this method
-                //meets its validation rules.
-                //I would be storing the new Product Details within a database.
-                //AddToDatabase(Name, VitCDailyAmount);
                 _repository.EditProduct(product);
+                TempData["AlertMessage"] = $"{product.Name} Edited Successfully!";
                 return RedirectToAction("GetProducts");
-            }
-            else
-            {
-                return View(product);
-            }
+            //}
+            //else
+            //{
+            //    return View(product);
+            //}
         }
     }
 }

@@ -19,11 +19,6 @@ namespace AvoidScurvyMVCApplication.Controllers
             _userManager = userManager;
             _logger = logger;
         }
-
-        public IActionResult Index()
-        {
-            return View();
-        }
         [Authorize()]
         public IActionResult Privacy()
         {

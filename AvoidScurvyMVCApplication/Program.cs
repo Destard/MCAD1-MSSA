@@ -13,7 +13,14 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddResponseCaching();
 builder.Services.AddDbContext<AvoidScurvyContext>(options =>
   options.UseSqlServer(builder.Configuration.GetConnectionString("AvoidScurvyContext")));
-builder.Services.AddDefaultIdentity<AvoidScurvyIdentityUser>()
+builder.Services.AddDefaultIdentity<AvoidScurvyIdentityUser>(options =>
+        {
+            options.Password.RequireNonAlphanumeric = false;
+            options.Password.RequireDigit = false;
+            options.Password.RequiredUniqueChars = 5;
+            options.Password.RequiredLength = 5;
+            options.Password.RequireLowercase = false;
+        })
     .AddEntityFrameworkStores<AvoidScurvyContext>();
 builder.Configuration.AddEnvironmentVariables();
 builder.Services.AddAuthentication()
@@ -45,7 +52,7 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=Product}/{action=Index}/{id?}");
 app.MapRazorPages();
 
 app.Run();
