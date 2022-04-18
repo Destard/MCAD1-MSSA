@@ -3,9 +3,10 @@ using System.ComponentModel.DataAnnotations;
 
 namespace AvoidScurvyMVCApplication.Models
 {
-    public class Product
+    public class Product //This is my database focused class.
     {
         public int ProductID { get; set; }
+        [Required]
         public string UserId { get; set; }
         [Display(Name = "Product Name")]
         [Required(ErrorMessage = "Please Provide a Name")]

@@ -66,17 +66,27 @@ namespace AvoidScurvyMVCApplication.Controllers
         [HttpPost]
         [Route("{controller}/AddProduct")]
         [Authorize()]
-        public IActionResult AddProductPost(Product product)
+        public IActionResult AddProductPost(AddProductViewModel product)
         //These parameters are populated from the form.
         {
             _logger.LogInformation("Add Product form was just posted!");
-            product.UserId = _userManager.GetUserId(User);
-            //if (ModelState.IsValid)
-            //{
-                _repository.AddProduct(product);
-                TempData["AlertMessage"] = $"{product.Name} Created Successfully!";
+            if (ModelState.IsValid) //Server-Side Validation.
+            {
+                Product productToAdd = new Product()
+                {
+                    Calories = product.Calories,
+                    Name = product.Name,
+                    UPC = product.UPC,
+                    VitCDailyAmount = product.VitCDailyAmount,
+                    StarRating = product.StarRating
+                }; //Properties pulled from the posted form.
+
+                productToAdd.UserId = _userManager.GetUserId(User); //Controller retrieves this.
+                _repository.AddProduct(productToAdd);
+                TempData["AlertMessage"] = $"{productToAdd.Name} Created Successfully!";
                 return RedirectToAction("GetProducts");
-            //}
+            }
+            
             return View("AddProduct", product);
         }
         [HttpGet]
